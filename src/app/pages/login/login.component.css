@@ -1,0 +1,122 @@
+
+.person {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto; 
+  }
+  .frase {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: #5a32a3;
+  }
+  
+  
+  .login-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .container-lateral {
+    width: 50%;
+    /* flex: 1; */
+    background-color: white;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 40px; */
+    text-align: center;
+  }
+  
+  .container-lateral h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .container-lateral p {
+    font-size: 18px;
+    max-width: 300px;
+  }
+  
+  .container-login {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  
+  .form-signin {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-signin h1 {
+    margin-bottom: 24px;
+    text-align: center;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .form-control {
+    background-color: #f8f9fa;
+    margin-bottom: 16px;
+    height:35px;
+    width: 95%;
+    font-size: 16px;
+    padding: 10px 12px;
+    border:  0px;
+    border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+  
+  .form-control:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 2px rgba(111, 66, 193, 0.2);
+    outline: none;
+  }
+  
+  .btn-primary {
+    width: 30%;
+    padding: 12px;
+    background-color: #6f42c1;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5a32a3;
+  }
+  
+  @media (max-width: 768px) {
+    .login-wrapper {
+      flex-direction: column;
+    }
+  
+    .container-lateral, .container-login {
+      flex: none;
+      width: 100%;
+    }
+  
+    .container-lateral {
+      padding: 30px 20px;
+    }
+  
+    .form-signin {
+      padding: 20px;
+    }
+  }
+  

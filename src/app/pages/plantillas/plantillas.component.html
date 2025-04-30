@@ -1,0 +1,123 @@
+<header
+  class="px-6 py-16 justify-center"
+  style="background-image: url('/assets/banner.jpg')"
+>
+  <div class="flex items-center justify-center">
+    <div class="w-full max-w-3xl relative">
+      <input
+        type="text"
+        placeholder="Buscar plantillas de constancias"
+        [(ngModel)]="searchPlantilla"
+        class="w-full px-6 py-3 rounded-full text-gray-500 bg-white border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none shadow-md"
+      />
+      <i
+        class="fas fa-search absolute top-1/2 right-6 transform -translate-y-1/2 text-gray-400"
+      ></i>
+    </div>
+  </div>
+</header>
+<main class="min-h-screen bg-white px-6 py-8 flex flex-col gap-12">
+  <!-- <div class="flex flex-wrap justify-center gap-4">
+      <button class="px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition">Para ti</button>
+      <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition">Participación</button>
+      <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition">Asistencia</button>
+      <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition">Reconocimiento</button>
+      <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition">Cursos</button>
+      <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition">Talleres</button>
+    </div> -->
+
+  <!-- Tipos de plantillas rápidas -->
+  <div>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+      Selecciona un tipo de plantilla
+    </h2>
+    <div class="flex gap-6 overflow-x-auto scrollbar-hide">
+      <!-- Plantilla de Participación -->
+      <div class="flex flex-col items-center min-w-[120px]">
+        <div
+          class="w-24 h-24 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl flex items-center justify-center"
+        >
+          <i class="fas fa-certificate text-white text-2xl"></i>
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Participación</p>
+      </div>
+
+      <!-- Plantilla de Asistencia -->
+      <div class="flex flex-col items-center min-w-[120px]">
+        <div
+          class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center"
+        >
+          <i class="fas fa-user-check text-white text-2xl"></i>
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Asistencia</p>
+      </div>
+
+      <!-- Plantilla de Reconocimiento -->
+      <div class="flex flex-col items-center min-w-[120px]">
+        <div
+          class="w-24 h-24 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center"
+        >
+          <i class="fas fa-trophy text-white text-2xl"></i>
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Reconocimiento</p>
+      </div>
+
+      <!-- Plantilla de Curso -->
+      <div class="flex flex-col items-center min-w-[120px]">
+        <div
+          class="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center"
+        >
+          <i class="fas fa-book text-white text-2xl"></i>
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Curso</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Explora plantillas -->
+  <div>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Explora plantillas</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div
+        *ngFor="let plantilla of plantillasFiltradas"
+        class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform cursor-pointer"
+        (click)="seleccionarPlantilla(plantilla)"
+      >
+        <img
+          [src]="plantilla.imagenUrl"
+          [alt]="plantilla.titulo"
+          class="w-full h-56 object-cover"
+        />
+        <div class="p-4 bg-white">
+          <h3 class="text-gray-800 font-semibold">{{ plantilla.titulo }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="plantillaSeleccionada"
+    class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50"
+  >
+    <div class="bg-white p-8 rounded-xl max-w-lg w-full relative">
+      <button
+        (click)="cerrarModal()"
+        class="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl"
+      >
+        &times;
+      </button>
+      <h2 class="text-2xl font-bold mb-4">
+        {{ plantillaSeleccionada.titulo }}
+      </h2>
+      <img
+        [src]="plantillaSeleccionada.imagenUrl"
+        alt="Previsualización"
+        class="w-full rounded-lg mb-6"
+      />
+      <button
+        class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-lg font-semibold"
+      >
+        Usar esta plantilla
+      </button>
+    </div>
+  </div>
+</main>
