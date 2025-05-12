@@ -1,0 +1,9 @@
+
+    <button (click)="loadLocalPdf()">
+      Cargar y Modificar PDF Local
+    </button>
+    <button (click)="modifyUploadedPdf()" [disabled]="!selectedFile">
+      Modificar PDF Subido
+    </button>
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf">
+  

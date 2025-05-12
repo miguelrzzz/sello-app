@@ -1,40 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { Plantilla } from '../../models/plantilla';
+import { Plantilla } from '../../models/plantilla.model';
+import { PlantillaService } from '../../service/plantillas.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-plantillas',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,HttpClientModule],
   templateUrl: './plantillas.component.html',
-  styleUrl: './plantillas.component.css'
+  styleUrl: './plantillas.component.css',
+  providers:[PlantillaService]
 })
-export class PlantillasComponent {
+export class PlantillasComponent implements OnInit{
+  constructor(private plantillaService : PlantillaService){}
   searchPlantilla : string = '';
   plantillaSeleccionada?: Plantilla;
 
-  plantillas: Plantilla[] = [
-    {
-      titulo: 'Constancia de Participación',
-      imagenUrl: 'assets/constancias/participacion1.png',
-      categoria: 'Participación',
-      descripcion: ''
-    },
-    {
-      titulo: 'Constancia de Asistencia',
-      imagenUrl: 'assets/constancias/asistencia1.png',
-      categoria: 'Asistencia',
-      descripcion: ''
-    },
-    {
-      titulo: 'Constancia de Reconocimiento',
-      imagenUrl: 'assets/constancias/reconocimiento1.png',
-      categoria: 'Reconocimiento',
-      descripcion: ''
-    },
-    // Puedes agregar más plantillas aquí
-  ];
+  plantillas: Plantilla[] |undefined;
 
+  ngOnInit(): void {
+  }
+  cargarPlantillas(){
+    this.plantillaService.getPlantillas().subscribe({
+      next: (response) =>{
+        if(response.success){
+          this.plantillas = response.data
+        }else{
+          console.error("la solicitud no fue exitosa")
+        }
+      },error:(err)=> {
+        console.error("Eror",err);
+      },
+    })
+  }
 
   buscarPlantilla(){
   }
@@ -47,12 +46,12 @@ export class PlantillasComponent {
   }
   get plantillasFiltradas(): Plantilla[] {
     if (!this.searchPlantilla.trim()) {
-      return this.plantillas;
+      return this.plantillas || [];
     }
     const term = this.searchPlantilla.toLowerCase();
-    return this.plantillas.filter(p =>
-      p.titulo.toLowerCase().includes(term) ||
-      p.categoria.toLowerCase().includes(term)
+    return (this.plantillas || []).filter(p =>
+      p.nombre.toLowerCase().includes(term) ||
+      p.descripcion.toLowerCase().includes(term)
     );
   }
 }

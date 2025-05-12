@@ -1,41 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Plantilla } from '../../models/plantilla';
+import { Component, OnInit } from '@angular/core';
+import { Plantilla } from '../../models/plantilla.model';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Router, NavigationEnd, RouterOutlet, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
-
+import { UsuarioService } from '../../service/usuario.service';
+import { PlantillaService } from '../../service/plantillas.service';
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterOutlet, RouterModule],
+  imports: [CommonModule, RouterOutlet, RouterModule,HttpClientModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  standalone: true
+  standalone: true,
+  providers: [UsuarioService,PlantillaService]
 })
-export class DashboardComponent {
-  // formNuevaPlantilla : FormGroup;
-  plantillas: Plantilla[] = [
-    {
-      titulo: 'Constancia de Participación',
-      imagenUrl: 'assets/constancias/participacion1.png',
-      categoria: 'Participación',
-      descripcion: ''
-    },
-    {
-      titulo: 'Constancia de Asistencia',
-      imagenUrl: 'assets/constancias/asistencia1.png',
-      categoria: 'Asistencia',
-      descripcion: ''
-    },
-    {
-      titulo: 'Constancia de Reconocimiento',
-      imagenUrl: 'assets/constancias/reconocimiento1.png',
-      categoria: 'Reconocimiento',
-      descripcion: ''
-    },
-    // Puedes agregar más plantillas aquí
-  ];
-
+export class DashboardComponent implements OnInit{
+  totalUsuarios : Number |null = null;
+ 
+  
+    // localService: any;
+  plantillas: Plantilla[] | undefined;
 
   mostrarModalNuevaPlantilla = false;
   mostrarModalImportarPlantilla = false;
@@ -47,7 +32,6 @@ export class DashboardComponent {
   };
 
   archivoImportado: File | null = null;
-
   abrirModalNuevaPlantilla() {
     this.mostrarModalNuevaPlantilla = true;
   }
@@ -67,7 +51,6 @@ export class DashboardComponent {
   crearPlantilla() {
     console.log('Plantilla creada:', this.nuevaPlantilla);
     this.cerrarModalNuevaPlantilla();
-    // Aquí puedes llamar a un servicio para guardar la plantilla
   }
 
   onArchivoSeleccionado(event: any) {
@@ -82,16 +65,42 @@ export class DashboardComponent {
     if (this.archivoImportado) {
       console.log('Importando archivo:', this.archivoImportado.name);
       this.cerrarModalImportarPlantilla();
-      // Aquí puedes llamar a un servicio para procesar el archivo
     }
   }
   isDefaultRoute = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private usuarioservice: UsuarioService, private plantillasService : PlantillaService) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.isDefaultRoute = event.urlAfterRedirects === '/' || event.url === '/dashboard';
-      });
+      }); 
   }
+  cargarPlantillas(){
+    this.plantillasService.getPlantillas().subscribe({
+      next: (response) =>{
+        if(response.success){
+          this.plantillas = response.data
+        }else{
+          console.error('La solicitud no fue exitosa');
+        }
+      },error:(err)=> {
+          console.error("Eror",err);
+      },
+    })
+  }
+  ngOnInit(): void {
+    this.usuarioservice.getTotalUsuarios().subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.totalUsuarios = response.data; // Aquí obtienes el valor 1
+        } else {
+          console.error('La solicitud no fue exitosa');
+        }
+      },
+      error: (err) => {
+        console.error('Error en la solicitud:', err);
+      }
+    });
+  }  
 }

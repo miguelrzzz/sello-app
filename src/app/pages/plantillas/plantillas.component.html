@@ -84,12 +84,12 @@
         (click)="seleccionarPlantilla(plantilla)"
       >
         <img
-          [src]="plantilla.imagenUrl"
-          [alt]="plantilla.titulo"
+          [src]="plantilla.ruta_archivo "
+          [alt]="plantilla.nombre"
           class="w-full h-56 object-cover"
         />
         <div class="p-4 bg-white">
-          <h3 class="text-gray-800 font-semibold">{{ plantilla.titulo }}</h3>
+          <h3 class="text-gray-800 font-semibold">{{ plantilla.nombre }}</h3>
         </div>
       </div>
     </div>
@@ -106,10 +106,10 @@
         &times;
       </button>
       <h2 class="text-2xl font-bold mb-4">
-        {{ plantillaSeleccionada.titulo }}
+        {{ plantillaSeleccionada.nombre }}
       </h2>
       <img
-        [src]="plantillaSeleccionada.imagenUrl"
+        [src]="plantillaSeleccionada.ruta_archivo"
         alt="Previsualización"
         class="w-full rounded-lg mb-6"
       />

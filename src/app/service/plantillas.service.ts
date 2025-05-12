@@ -5,27 +5,27 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
-  private apiUrl = 'http://localhost:3000/public/usuarios'; 
+export class PlantillaService {
+  private apiUrl = 'http://localhost:3000/public/plantillas'; 
 
   constructor(private http: HttpClient) {}
 
   //GET /usuarios/Total
-  getTotalUsuarios(): Observable<{success: boolean, data: number}> {
+  getTotalPlantillas(): Observable<{success: boolean, data: number}> {
     return this.http.get<{success: boolean, data: number}>(`${this.apiUrl}/Total`);
   }
   // GET /usuarios
-  getUsuarios(): Observable<any> {
+  getPlantillas(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
 
   // GET /usuarios/{id}
-  getUsuario(id: number): Observable<any> {
+  getPlantillaById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
   // POST /usuarios
-  crearUsuario(usuario: any): Observable<any> {
+  crearPlantilla(usuario: any): Observable<any> {
     return this.http.post(this.apiUrl, usuario);
   }
 

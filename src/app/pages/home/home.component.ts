@@ -16,13 +16,27 @@ import { OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   isLog = false;
 
-  constructor(private _localserivce: LocalService) {}
+  constructor(private localService: LocalService) {}
 
   ngOnInit() {
-    this.isLog = this.isLogin();
+    this.checkAuthStatus();
+  }
+  checkAuthStatus(): void {
+    this.isLog = this.isUserLoggedIn();
+  }
+  isUserLoggedIn(): boolean {  // Nombre más descriptivo
+    try {
+      const loggedIn = this.localService.getData("isLoggedIn");
+      return loggedIn === "true"; // Comparación estricta
+    } catch (error) {
+      console.error('Error checking auth status:', error);
+      return false;
+    }
   }
 
+
   isLogin(): boolean {
-    return this._localserivce.getData("isLoggedIn") ? true : false;
+    const loggedIn = this.localService.getData("isLoggedIn");
+    return loggedIn === "true"; // Comparación estricta
   }
 }

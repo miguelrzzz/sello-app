@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../service/usuario.service';
+import { UsuarioService } from '../../../service/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
-import { usuarios } from '../../models/usuarios';
+import { usuarios } from '../../../models/usuarios.model';
 @Component({
   standalone: true,
   selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css'],
+  templateUrl: './panel-usuario.component.html',
+  styleUrls: ['./panel-usuario.component.css'],
   imports: [CommonModule, HttpClientModule],
   providers: [UsuarioService]
 })
-export class UsuarioComponent implements OnInit{
+export class PanelUsuarioComponent implements OnInit{
   constructor( private usuario_service : UsuarioService){}
   usuarios: usuarios[] = [];
   
