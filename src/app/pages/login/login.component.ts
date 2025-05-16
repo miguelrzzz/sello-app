@@ -3,24 +3,23 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LocalService } from '../../service/local.service';
 import { CommonModule } from '@angular/common';
-import { UsuarioService } from '../../service/usuario.service';
-import { usuarios } from '../../models/usuarios.model';
 import { HttpClientModule } from '@angular/common/http';
 
-interface usuario{
-  nombre : string;
-  correo: string;
-  password : string;
-  
-}
+// Servicios
+import { UsuarioService } from '../../service/usuario.service';
+import { RolesService }from '../../service/roles.service';
 
+// Modelos
+import { usuarios } from '../../models/usuarios.model';
+import { Roles } from '../../models/roles.model';
+import { PagesErrorComponent } from "../../shared/pages-error/pages-error.component";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule,HttpClientModule],
-  providers: [UsuarioService]
+  imports: [FormsModule, CommonModule, HttpClientModule],
+  providers: [UsuarioService, RolesService]
 })
 export class LoginComponent implements OnInit {
   a : boolean = false;
@@ -32,22 +31,29 @@ export class LoginComponent implements OnInit {
   confirmPassword: string = '';
 
   isRegister: boolean = false;
-
+  roles:  Roles[] = [];
   usuarios: usuarios[] = [];
-  // localService: any;
-  constructor(private router: Router, private localService : LocalService, private usuario_service : UsuarioService ){}
+  // Un Administrador es un usuario con idRol = 1
+  admin = 1;
+  isAdmin : boolean = false;  
+  constructor(private router: Router, private localService : LocalService, private usuario_service : UsuarioService , private roles_service : RolesService){}
 
 
   onLogin() {
     const usuarioValido = this.usuarios.find(
       user => user.correo === this.username && user.password === this.password
     );
-
-
     if (usuarioValido) {
       let id = String(usuarioValido.idUsuario);
       this.localService.saveData('isLoggedIn', id);
-      this.router.navigate(['/plantillas']);
+      //Rutas de direccionamiento de acuerdo al rol
+      if(usuarioValido.idRol === this.admin){
+        this.isAdmin = true;
+        this.router.navigate(['/dashboard']);
+      }else{
+        this.router.navigate(['/plantillas']);
+      }
+
     } else {
       this.localService.saveData('isLoggedOut', 'false');
       alert('Credenciales inválidas');
@@ -60,18 +66,22 @@ export class LoginComponent implements OnInit {
       return;
     }
   }
-    // console.
   toggleForm(){
     this.isRegister = !this.isRegister;
   }
   ngOnInit() {
-    // Cargar usuarios si es necesario
     this.cargarUsuarios();
   }
 
   cargarUsuarios() {
     this.usuario_service.getUsuarios().subscribe(data => {
       this.usuarios = data.data;
+    });
+  }
+  cargarRoles() { 
+    this.roles_service.getRoles().subscribe(data => {
+      this.roles = data.data ; 
+      console.log(data);
     });
   }
 }

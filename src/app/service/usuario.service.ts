@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { usuarios } from '../models/usuarios.model';
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
   private apiUrl = 'http://localhost:3000/public/usuarios'; 
+  private usuarioSesion: usuarios = {
+    idUsuario : 0,
+    nombre:'',
+    apPaterno :'',
+    apMaterno: '' ,
+    correo: '',
+    password: '',
+    idEstado: 0,
+    idRol: 0
+  }
 
   constructor(private http: HttpClient) {}
 
+  // Funciones para acceder a la APIs relacionadas a los usuarios
   //GET /usuarios/Total
   getTotalUsuarios(): Observable<{success: boolean, data: number}> {
     return this.http.get<{success: boolean, data: number}>(`${this.apiUrl}/Total`);
@@ -42,5 +53,15 @@ export class UsuarioService {
   // DELETE /usuarios/{id}
   eliminarUsuario(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+  //********************************************************************************* */
+  //Funciones basicas para el manejo de los usuarios
+
+  //Guardar la session
+  guardarUsuarioSesion(usuario: usuarios): void {
+    this.usuarioSesion = usuario;
+  }
+  getUsuarioSesion(): usuarios {
+    return this.usuarioSesion;
   }
 }

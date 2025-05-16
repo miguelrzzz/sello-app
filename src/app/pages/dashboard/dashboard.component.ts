@@ -5,21 +5,37 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Router, NavigationEnd, RouterOutlet, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
+
+// Servicios
 import { UsuarioService } from '../../service/usuario.service';
+import { RolesService } from '../../service/roles.service';
 import { PlantillaService } from '../../service/plantillas.service';
+import { LocalService } from '../../service/local.service';
+// Modelos
+import { usuarios } from '../../models/usuarios.model';
+import { Roles } from '../../models/roles.model';
+import { PagesErrorComponent } from '../../shared/pages-error/pages-error.component';
+
+
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterOutlet, RouterModule,HttpClientModule],
+  imports: [CommonModule, RouterOutlet, RouterModule, HttpClientModule, PagesErrorComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
   standalone: true,
-  providers: [UsuarioService,PlantillaService]
+  providers: [UsuarioService, PlantillaService, LocalService, RolesService]
 })
-export class DashboardComponent implements OnInit{
-  totalUsuarios : Number |null = null;
- 
-  
-    // localService: any;
+export class DashboardComponent implements OnInit {
+  // Variables
+  totalUsuarios: Number | null = null;
+
+  // Variables para validacion de usuario
+  admin = 1;
+  isAdmin: boolean = false;
+  usuarios: usuarios[] = [];
+  roles: Roles[] = [];
+
+  // localService: any;
   plantillas: Plantilla[] | undefined;
 
   mostrarModalNuevaPlantilla = false;
@@ -69,28 +85,42 @@ export class DashboardComponent implements OnInit{
   }
   isDefaultRoute = true;
 
-  constructor(private router: Router, private usuarioservice: UsuarioService, private plantillasService : PlantillaService) {
+  constructor(
+    private router: Router,
+    private localService: LocalService,
+    private usuario_service: UsuarioService,
+    private plantillasService: PlantillaService,
+    private roles_service: RolesService
+  ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.isDefaultRoute = event.urlAfterRedirects === '/' || event.url === '/dashboard';
-      }); 
+      });
   }
-  cargarPlantillas(){
+  cargarPlantillas() {
     this.plantillasService.getPlantillas().subscribe({
-      next: (response) =>{
-        if(response.success){
+      next: (response) => {
+        if (response.success) {
           this.plantillas = response.data
-        }else{
+        } else {
           console.error('La solicitud no fue exitosa');
         }
-      },error:(err)=> {
-          console.error("Eror",err);
+      }, error: (err) => {
+        console.error("Eror", err);
       },
     })
   }
   ngOnInit(): void {
-    this.usuarioservice.getTotalUsuarios().subscribe({
+    const id = this.localService.getData('isLoggedIn');
+    this.cargarUsuarios();
+    // const usuario = this.usuario_service.getUsuario(Number(id));
+    let usuario = this.usuarios.find((usuario) => usuario.idUsuario == Number(id));
+    if (usuario?.idRol === Number(id)) {
+      this.isAdmin = true;
+    }
+
+    this.usuario_service.getTotalUsuarios().subscribe({
       next: (response) => {
         if (response.success) {
           this.totalUsuarios = response.data; // Aquí obtienes el valor 1
@@ -102,5 +132,10 @@ export class DashboardComponent implements OnInit{
         console.error('Error en la solicitud:', err);
       }
     });
-  }  
+  }
+    cargarUsuarios() {
+    this.usuario_service.getUsuarios().subscribe(data => {
+      this.usuarios = data.data;
+    });
+  }
 }

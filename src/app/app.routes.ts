@@ -7,6 +7,7 @@ import { PanelUsuarioComponent } from './pages/dashboard/panel-usuarios/panel-us
 import { DesignComponent } from './pages/plantillas/design/design.component';
 import { PanelPlantillasComponent } from './pages/dashboard/panel-plantillas/panel-plantillas.component';
 import { PanelCategoriasComponent } from './pages/dashboard/panel-categorias/panel-categorias.component';
+import { PagesErrorComponent } from './shared/pages-error/pages-error.component';
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
@@ -21,6 +22,7 @@ export const routes: Routes = [
         {path: 'categorias-panel',component:PanelCategoriasComponent },
       ]
     },
-    {path: 'plantillas/design', component: DesignComponent }
+    {path: 'plantillas/design', component: DesignComponent },
+    {path: 'error', component: PagesErrorComponent},
     // {path: 'p'}
   ];

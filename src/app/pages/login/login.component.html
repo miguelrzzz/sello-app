@@ -1,69 +1,120 @@
-<main class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
-  <div class="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20 shadow-lg w-full max-w-5xl flex flex-col md:flex-row items-center">
-
+<main
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden"
+>
+  <div
+    class="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20 shadow-lg w-full max-w-5xl flex flex-col md:flex-row items-center"
+  >
     <!-- Imagen lateral -->
-    <div class="md:w-1/2 hidden md:flex flex-col items-center justify-center p-8 animate-fade-in-left">
-      <img src="assets/logro.jpg" alt="Logo" class="w-60 h-auto mb-6 rounded-lg shadow-lg" />
+    <div
+      class="md:w-1/2 hidden md:flex flex-col items-center justify-center p-8 animate-fade-in-left"
+    >
+      <img
+        src="assets/logro.jpg"
+        alt="Logo"
+        class="w-60 h-auto mb-6 rounded-lg shadow-lg"
+      />
       <blockquote class="text-white text-center italic">
-        “Una constancia no solo certifica, sino que respalda el esfuerzo y compromiso.”
+        “Una constancia no solo certifica, sino que respalda el esfuerzo y
+        compromiso.”
       </blockquote>
     </div>
 
     <!-- Login/Register Forms -->
     <div class="w-full md:w-1/2 p-8 space-y-6 animate-fade-in-right">
-      
       <!-- Título dinámico -->
       <h2 class="text-3xl font-bold text-white mb-4 text-center">
-        {{ isRegister ? 'Crear una cuenta' : 'Iniciar sesión' }}
+        {{ isRegister ? "Crear una cuenta" : "Iniciar sesión" }}
       </h2>
 
       <form class="space-y-6">
         <!-- Registro: campos extra -->
         <div *ngIf="isRegister">
-          <label for="fullname" class="block mb-2 text-sm font-medium text-white">Nombre completo</label>
-          <input type="text" id="fullname" name="fullname" [(ngModel)]="fullname"
+          <label
+            for="fullname"
+            class="block mb-2 text-sm font-medium text-white"
+            >Nombre completo</label
+          >
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            [(ngModel)]="fullname"
             class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Tu nombre completo" required>
+            placeholder="Tu nombre completo"
+            required
+          />
         </div>
 
         <div>
-          <label for="correo" class="block mb-2 text-sm font-medium text-white">Correo electrónico</label>
-          <input type="email" id="correo" name="username" [(ngModel)]="username"
+          <label for="correo" class="block mb-2 text-sm font-medium text-white"
+            >Correo electrónico</label
+          >
+          <input
+            type="email"
+            id="correo"
+            name="username"
+            [(ngModel)]="username"
             class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Email address" required>
+            placeholder="Email address"
+            required
+          />
         </div>
 
         <div>
-          <label for="password" class="block mb-2 text-sm font-medium text-white">Contraseña</label>
-          <input type="password" id="password" name="password" [(ngModel)]="password"
+          <label
+            for="password"
+            class="block mb-2 text-sm font-medium text-white"
+            >Contraseña</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
             class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Password" required>
+            placeholder="Password"
+            required
+          />
         </div>
 
         <!-- Confirmar contraseña solo en registro -->
         <div *ngIf="isRegister">
-          <label for="confirmPassword" class="block mb-2 text-sm font-medium text-white">Confirmar contraseña</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword"
+          <label
+            for="confirmPassword"
+            class="block mb-2 text-sm font-medium text-white"
+            >Confirmar contraseña</label
+          >
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            [(ngModel)]="confirmPassword"
             class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Repite tu contraseña" required>
+            placeholder="Repite tu contraseña"
+            required
+          />
         </div>
 
         <!-- Botón de acción -->
-        <button type="button" (click)="isRegister ? onRegister() : onLogin()"
-          class="w-full bg-white text-purple-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-          {{ isRegister ? 'Registrarme' : 'Ingresar' }}
+        <button
+          type="button"
+          (click)="isRegister ? onRegister() : onLogin()"
+          class="w-full bg-white text-purple-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+        >
+          {{ isRegister ? "Registrarme" : "Ingresar" }}
         </button>
       </form>
 
       <!-- Cambio de login/registro -->
       <p class="text-center text-white">
-        {{ isRegister ? '¿Ya tienes una cuenta?' : '¿No tienes una cuenta?' }}
-        <button (click)="toggleForm()" class="text-purple-300 underline hover:text-purple-100 ml-2">
-          {{ isRegister ? 'Inicia sesión' : 'Regístrate' }}
+        {{ isRegister ? "¿Ya tienes una cuenta?" : "¿No tienes una cuenta?" }}
+        <button
+          (click)="toggleForm()"
+          class="text-purple-300 underline hover:text-purple-100 ml-2"
+        >
+          {{ isRegister ? "Inicia sesión" : "Regístrate" }}
         </button>
       </p>
-      
     </div>
-
   </div>
 </main>
