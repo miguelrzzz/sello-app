@@ -14,8 +14,7 @@ export const routes: Routes = [
     {path: 'plantillas', component: PlantillasComponent},
     {path: 'login', component: LoginComponent},
     {
-      path: 'dashboard',
-      component: DashboardComponent,
+      path: 'dashboard', component: DashboardComponent,
       children: [
         {path: 'usuarios-panel', component: PanelUsuarioComponent},
         {path: 'plantillas-panel', component: PanelPlantillasComponent},
@@ -24,5 +23,6 @@ export const routes: Routes = [
     },
     {path: 'plantillas/design', component: DesignComponent },
     {path: 'error', component: PagesErrorComponent},
-    // {path: 'p'}
+    // {path: '**', redirectTo: 'error'},
+
   ];

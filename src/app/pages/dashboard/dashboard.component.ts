@@ -15,6 +15,7 @@ import { LocalService } from '../../service/local.service';
 import { usuarios } from '../../models/usuarios.model';
 import { Roles } from '../../models/roles.model';
 import { PagesErrorComponent } from '../../shared/pages-error/pages-error.component';
+import { response } from 'express';
 
 
 @Component({
@@ -111,31 +112,31 @@ export class DashboardComponent implements OnInit {
       },
     })
   }
-  ngOnInit(): void {
-    const id = this.localService.getData('isLoggedIn');
-    this.cargarUsuarios();
-    // const usuario = this.usuario_service.getUsuario(Number(id));
-    let usuario = this.usuarios.find((usuario) => usuario.idUsuario == Number(id));
-    if (usuario?.idRol === Number(id)) {
+
+  async ngOnInit() {
+    // Esperamos a que se carguen los usuarios antes de continuar
+    await this.cargarUsuarios(); 
+    const email = this.localService.getData('isLoggedIn');
+    const usuario = (this.usuarios.find(usuario => usuario.correo === email));
+    if (usuario?.idRol === this.admin) {
       this.isAdmin = true;
     }
-
-    this.usuario_service.getTotalUsuarios().subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.totalUsuarios = response.data; // Aquí obtienes el valor 1
-        } else {
-          console.error('La solicitud no fue exitosa');
-        }
-      },
-      error: (err) => {
-        console.error('Error en la solicitud:', err);
-      }
-    });
   }
-    cargarUsuarios() {
-    this.usuario_service.getUsuarios().subscribe(data => {
-      this.usuarios = data.data;
+
+  cargarUsuarios() {
+    return new Promise<void>((resolve, reject) => {
+      this.usuario_service.getUsuarios().subscribe(
+        (response) => {
+          this.usuarios = response.data;
+          // Indicar que la carga de usuarios ha terminado
+          resolve();
+        },
+        (err) => {
+          console.error('Error al cargar usuarios:', err);
+          // Indicar que hubo un error al cargar los usuarios
+          reject(err);
+        }
+      );
     });
   }
 }

@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   isUserLoggedIn(): boolean {  // Nombre más descriptivo
     try {
       const loggedIn = this.localService.getData("isLoggedIn");
-      return loggedIn === "true"; // Comparación estricta
+      return loggedIn !== null && loggedIn !== undefined && loggedIn !== "false";
     } catch (error) {
       console.error('Error checking auth status:', error);
       return false;

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Plantilla } from '../../models/plantilla.model';
 import { PlantillaService } from '../../service/plantillas.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-plantillas',
-  imports: [CommonModule,FormsModule,HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, FontAwesomeModule],
   templateUrl: './plantillas.component.html',
   styleUrl: './plantillas.component.css',
   providers:[PlantillaService]
 })
 export class PlantillasComponent implements OnInit{
+isDropdownOpen: any;
   constructor(private plantillaService : PlantillaService){}
   searchPlantilla : string = '';
   plantillaSeleccionada?: Plantilla;

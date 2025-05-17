@@ -1,3 +1,7 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
 <header
   class="px-6 py-16 justify-center"
   style="background-image: url('/assets/banner.jpg')"
@@ -14,6 +18,34 @@
         class="fas fa-search absolute top-1/2 right-6 transform -translate-y-1/2 text-gray-400"
       ></i>
     </div>
+    <div id="opciones-usuarios" class="absolute top-16 right-6">
+      <div class="flex items-center gap-4">
+        <div class="relative">
+          <button class="flex items-center gap-2 text-gray-100 font-semibold">
+            <fa-icon [icon]="'magnet'"></fa-icon>
+          </button>
+          <button
+            class="flex items-center gap-2 text-gray-100 font-semibold"
+            (click)="isDropdownOpen = !isDropdownOpen"
+          >
+            <i class="fas fa-user-circle text-2xl"></i>
+          </button>
+          <div
+            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-10"
+            *ngIf="isDropdownOpen"
+          >
+            <ul class="py-2">
+              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                Cerrar sesión
+              </li>
+              <li>
+                <i class="fa fa-bell-o" aria-hidden="true">hoal</i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 <main class="min-h-screen bg-white px-6 py-8 flex flex-col gap-12">
@@ -27,7 +59,7 @@
     </div> -->
 
   <!-- Tipos de plantillas rápidas -->
-  <div>
+  <div class="flex flex-col gap-6">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">
       Selecciona un tipo de plantilla
     </h2>
@@ -74,7 +106,6 @@
     </div>
   </div>
 
-  <!-- Explora plantillas -->
   <div>
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Explora plantillas</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -84,7 +115,7 @@
         (click)="seleccionarPlantilla(plantilla)"
       >
         <img
-          [src]="plantilla.ruta_archivo "
+          [src]="plantilla.ruta_archivo"
           [alt]="plantilla.nombre"
           class="w-full h-56 object-cover"
         />

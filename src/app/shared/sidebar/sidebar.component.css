@@ -1,0 +1,28 @@
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 767px) {
+  #sidebar-multi-level-sidebar {
+    z-index: 50;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+
+/* Transición suave para el sidebar */
+#sidebar-multi-level-sidebar {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Estilo para el enlace activo */
+.router-link-active {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.dark .router-link-active {
+  background-color: #374151;
+  color: #f9fafb;
+}

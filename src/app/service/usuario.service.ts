@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable } from 'rxjs';
 import { usuarios } from '../models/usuarios.model';
 @Injectable({
   providedIn: 'root'
@@ -35,10 +35,15 @@ export class UsuarioService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  // POST /usuarios
-  crearUsuario(usuario: any): Observable<any> {
-    return this.http.post(this.apiUrl, usuario);
+  // GET /usuarios/{email}
+  getUsuarioByEmail(email: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/email/${email}`);
   }
+  // POST /usuarios/insertar
+  crearUsuario(usuario: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/insertar`, usuario);
+  }
+
 
   // POST /usuarios/login
   loginUsuario(credentials: any): Observable<any> {
