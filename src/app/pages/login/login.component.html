@@ -1,159 +1,155 @@
-<main
-  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden"
->
-  <div
-    class="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20 shadow-lg w-full max-w-5xl flex flex-col md:flex-row items-center"
-  >
-    <!-- Imagen lateral -->
-    <div
-      class="md:w-1/2 hidden md:flex flex-col items-center justify-center p-8 animate-fade-in-left"
-    >
-      <img
-        src="assets/logro.jpg"
-        alt="Logo"
-        class="w-60 h-auto mb-6 rounded-lg shadow-lg"
-      />
-      <blockquote class="text-white text-center italic">
-        “Una constancia no solo certifica, sino que respalda el esfuerzo y
-        compromiso.”
-      </blockquote>
+<div class="min-h-screen bg-white flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <!-- Encabezado -->
+    <div class="text-center mb-8">
+      <img src="assets/ISOTIPO-UABC-COLORORIGINAL.png" alt="Logo UABC" class="h-20 mx-auto mb-4">
+      <h1 class="text-3xl font-bold text-[#00723F]">UABC</h1>
+      <p class="text-gray-600 italic mt-2">"Por la realización plena del hombre"</p>
+      <div class="h-1 w-16 bg-[#DD971A] mx-auto mt-4"></div>
     </div>
 
-    <!-- Login/Register Forms -->
-    <div class="w-full md:w-1/2 p-8 space-y-6 animate-fade-in-right">
+    <!-- Contenedor del formulario -->
+    <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-100">
       <!-- Título dinámico -->
-      <h2 class="text-3xl font-bold text-white mb-4 text-center">
-        {{ isRegister ? "Crear una cuenta" : "Iniciar sesión" }}
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+        {{ isRegister ? "Crear cuenta" : "Iniciar sesión" }}
       </h2>
-
-      <form class="space-y-6">
-        <!-- Registro: campos extra -->
+      
+      <form class="space-y-5" (ngSubmit)="isRegister ? onRegister() : onLogin()">
+        <!-- Campos adicionales para registro -->
         <div *ngIf="isRegister" class="space-y-4">
-          <!-- Nombre (primer renglón) -->
           <div>
-            <label
-              for="nombre"
-              class="block mb-2 text-sm font-medium text-white"
-              >Nombre(s)</label
-            >
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Nombre(s)
+            </label>
             <input
               type="text"
-              id="nombre"
-              name="nombre"
               [(ngModel)]="nombre"
-              class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              name="nombre"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DD971A] focus:border-[#DD971A] transition"
               placeholder="Ej. Juan Carlos"
               required
-            />
+            >
           </div>
 
-          <!-- Apellidos (segundo renglón) -->
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label
-                for="apPaterno"
-                class="block mb-2 text-sm font-medium text-white"
-                >Apellido Paterno</label
-              >
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Apellido Paterno
+              </label>
               <input
                 type="text"
-                id="apPaterno"
-                name="apPaterno"
                 [(ngModel)]="apPaterno"
-                class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                name="apPaterno"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DD971A] focus:border-[#DD971A] transition"
                 placeholder="Ej. Pérez"
                 required
-              />
+              >
             </div>
             <div>
-              <label
-                for="apMaterno"
-                class="block mb-2 text-sm font-medium text-white"
-                >Apellido Materno</label
-              >
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Apellido Materno
+              </label>
               <input
                 type="text"
-                id="apMaterno"
-                name="apMaterno"
                 [(ngModel)]="apMaterno"
-                class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                name="apMaterno"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DD971A] focus:border-[#DD971A] transition"
                 placeholder="Ej. López"
-              />
+              >
             </div>
           </div>
         </div>
 
-        <!-- Resto de los campos (correo, contraseña, etc.) -->
+        <!-- Campo Correo -->
         <div>
-          <label for="correo" class="block mb-2 text-sm font-medium text-white"
-            >Correo electrónico</label
-          >
-          <input
-            type="email"
-            id="correo"
-            name="email"
-            [(ngModel)]="email"
-            class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Email address"
-            required
-          />
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Correo electrónico institucional
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-envelope text-gray-400"></i>
+            </div>
+            <input 
+              type="email" 
+              [(ngModel)]="email"
+              name="email"
+              placeholder="usuario@uabc.edu.mx" 
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DD971A] focus:border-[#DD971A] transition"
+              required
+            >
+          </div>
         </div>
 
+        <!-- Campo Contraseña -->
         <div>
-          <label
-            for="password"
-            class="block mb-2 text-sm font-medium text-white"
-            >Contraseña</label
-          >
-          <input
-            type="password"
-            id="password"
-            name="password"
-            [(ngModel)]="password"
-            class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Password"
-            required
-          />
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Contraseña
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            <input 
+              type="password" 
+              [(ngModel)]="password"
+              name="password"
+              placeholder="*********" 
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DD971A] focus:border-[#DD971A] transition"
+              required
+            >
+          </div>
         </div>
 
-        <!-- Confirmar contraseña solo en registro -->
+        <!-- Confirmar Contraseña (solo en registro) -->
         <div *ngIf="isRegister">
-          <label
-            for="confirmPassword"
-            class="block mb-2 text-sm font-medium text-white"
-            >Confirmar contraseña</label
-          >
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            [(ngModel)]="confirmPassword"
-            class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Repite tu contraseña"
-            required
-          />
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Confirmar contraseña
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            <input 
+              type="password" 
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="*********" 
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DD971A] focus:border-[#DD971A] transition"
+              required
+            >
+          </div>
         </div>
 
         <!-- Botón de acción -->
         <button
-          type="button"
+          type="submit"
+          (keyup.enter)="isRegister ? onRegister() : onLogin()"
           (click)="isRegister ? onRegister() : onLogin()"
-          class="w-full bg-white text-purple-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          class="w-full bg-[#DD971A] text-white py-3 rounded-lg font-semibold hover:bg-[#c27e0e] transition-colors flex items-center justify-center gap-2"
         >
+          <i class="fas" [ngClass]="isRegister ? 'fa-user-plus' : 'fa-sign-in-alt'"></i>
           {{ isRegister ? "Registrarme" : "Ingresar" }}
         </button>
       </form>
 
       <!-- Cambio de login/registro -->
-      <p class="text-center text-white">
+      <p class="text-center text-gray-600 mt-4">
         {{ isRegister ? "¿Ya tienes una cuenta?" : "¿No tienes una cuenta?" }}
         <button
           (click)="toggleForm()"
-          class="text-purple-300 underline hover:text-purple-100 ml-2"
+          class="text-[#DD971A] font-medium hover:underline ml-2"
         >
           {{ isRegister ? "Inicia sesión" : "Regístrate" }}
         </button>
       </p>
     </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8 text-xs text-gray-500">
+      <p>Sistema de Autenticación UABC © 2023</p>
+    </div>
   </div>
-</main>
+</div>
+
+

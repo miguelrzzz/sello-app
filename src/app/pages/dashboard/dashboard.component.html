@@ -1,681 +1,203 @@
-<!-- app.component.html -->
 <div *ngIf="isAdmin; else errorPage">
-  <div class="flex h-screen bg-gray-100">
+  <div class="flex h-screen bg-gray-50">
     <!-- Sidebar -->
     <div class="w-64 bg-white shadow-md">
       <!-- Logo/Header -->
-      <div
-        class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 p-2"
-      >
-        <h1 class="text-white font-bold text-xl">Sello-Admin</h1>
-        <p class="text-white text-sm opacity-80">Panel de gestión</p>
+      <div class="sidebar-bg p-4">
+        <div class="flex items-center">
+          <img src="../../../assets/logo-uabc.png" alt="Logo UABC" class="h-10 mr-3">
+          <div>
+            <h1 class="text-white font-bold text-xl">UABC Constancias</h1>
+            <p class="text-white text-sm opacity-90">Panel de administración</p>
+          </div>
+        </div>
       </div>
 
       <!-- Navigation -->
       <nav class="mt-2">
         <a
           [routerLink]="['/dashboard']"
-          class="flex items-center py-3 px-6 text-gray-700 bg-gray-200 border-r-4 border-indigo-500 font-medium cursor-pointer"
+          class="flex items-center py-3 px-6 text-gray-700 bg-gray-100 border-r-4 border-[#00723F] font-medium cursor-pointer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
           Dashboard
         </a>
         <a
           [routerLink]="['plantillas-panel']"
-          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-200 cursor-pointer"
+          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-100 cursor-pointer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
           Plantillas
         </a>
         <a
           [routerLink]="['categorias-panel']"
-          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-200 cursor-pointer"
+          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-100 cursor-pointer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-            />
-          </svg>
           Categorías
         </a>
         <a
           [routerLink]="['usuarios-panel']"
-          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-200 cursor-pointer"
+          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-100 cursor-pointer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
           Usuarios
         </a>
         <a
-          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-200 cursor-pointer"
+          class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-100 cursor-pointer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            />
-          </svg>
           Constancias Emitidas
         </a>
-        <!-- <a class="flex items-center py-3 px-6 text-gray-700 hover:bg-gray-200 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          Configuración
-        </a> -->
       </nav>
     </div>
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col overflow-hidden">
       <!-- Top Header -->
-      <header
-        class="flex justify-between items-center py-4 px-6 bg-white border-b"
-      >
+      <header class="flex justify-between items-center py-4 px-6 bg-white border-b">
         <div class="flex items-center">
           <button class="text-gray-500 focus:outline-none lg:hidden">
-            <svg
-              class="h-6 w-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4 6H20M4 12H20M4 18H11"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </svg>
+            <i class="fas fa-bars"></i>
           </button>
-
-          <!-- <div class="relative mx-4 lg:mx-0">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-              <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </span>
-            <input class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600" type="text" placeholder="Buscar plantilla">
-          </div> -->
         </div>
 
         <div class="flex items-center">
+          <button class="flex mx-4 text-gray-600 focus:outline-none">
+            <i class="fas fa-bell"></i>
+          </button>
+          
           <div class="relative">
-            <button class="flex mx-4 text-gray-600 focus:outline-none">
-              <svg
-                class="h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-              <!-- <span class="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span> -->
-            </button>
-          </div>
-
-          <div class="relative">
-            <button
-              class="relative block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none"
-            >
-              <img
-                class="h-full w-full object-cover"
-                src=""
-                alt="Avatar de administrador"
-              />
+            <button class="flex items-center text-gray-700">
+              <span class="mr-2 hidden md:inline">{{usuario?.nombre}}</span>
+              <div class="w-8 h-8 rounded-full bg-[#00723F] flex items-center justify-center text-white">
+                <i class="fas fa-user"></i>
+              </div>
             </button>
           </div>
         </div>
       </header>
 
       <!-- Main Dashboard Area -->
-      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
         <div class="container mx-auto px-6 py-8">
           <ng-container *ngIf="isDefaultRoute; else routedContent">
-            <h3 class="text-gray-700 text-3xl font-medium">
-              Panel de Gestión de Constancias
+            <h3 class="text-gray-800 text-3xl font-medium">
+              Panel de Administración
             </h3>
 
             <!-- Stats Cards -->
-            <div class="mt-4">
-              <div class="flex flex-nowrap -mx-8">
-                <div class="w-full px-6 sm:w-1/2 xl:w-1/4">
-                  <div
-                    class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
-                  >
-                    <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
-                      <svg
-                        class="h-8 w-8 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        />
-                      </svg>
-                    </div>
-
-                    <div class="mx-5">
-                      <h4 class="text-2xl font-semibold text-gray-700">45</h4>
-                      <div class="text-gray-500">Plantillas Totales</div>
-                    </div>
+            <div class="mt-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Plantillas Totales -->
+                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                  <div class="p-3 rounded-full bg-[#00723F]/20">
+                    <i class="fas fa-file-alt text-[#00723F] text-xl"></i>
+                  </div>
+                  <div class="mx-5">
+                    <h4 class="text-2xl font-semibold text-gray-800">{{plantillasTotales}}</h4>
+                    <div class="text-gray-600">Plantillas Totales</div>
                   </div>
                 </div>
 
-                <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/4 sm:mt-0">
-                  <div
-                    class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
-                  >
-                    <div class="p-3 rounded-full bg-purple-600 bg-opacity-75">
-                      <svg
-                        class="h-8 w-8 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                        />
-                      </svg>
-                    </div>
-
-                    <div class="mx-5">
-                      <h4 class="text-2xl font-semibold text-gray-700">
-                        1,257
-                      </h4>
-                      <div class="text-gray-500">Constancias Emitidas</div>
-                    </div>
+                <!-- Constancias Emitidas -->
+                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                  <div class="p-3 rounded-full bg-[#DD971A]/20">
+                    <i class="fas fa-file-export text-[#DD971A] text-xl"></i>
+                  </div>
+                  <div class="mx-5">
+                    <h4 class="text-2xl font-semibold text-gray-800">despues</h4>
+                    <div class="text-gray-600">Constancias Emitidas</div>
                   </div>
                 </div>
 
-                <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/4 xl:mt-0">
-                  <div
-                    class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
-                  >
-                    <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
-                      <svg
-                        class="h-8 w-8 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                        />
-                      </svg>
-                    </div>
-
-                    <div class="mx-5">
-                      <h4 class="text-2xl font-semibold text-gray-700">8</h4>
-                      <div class="text-gray-500">Categorías</div>
-                    </div>
+                <!-- Categorías -->
+                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                  <div class="p-3 rounded-full bg-[#00723F]/20">
+                    <i class="fas fa-tags text-[#00723F] text-xl"></i>
+                  </div>
+                  <div class="mx-5">
+                    <h4 class="text-2xl font-semibold text-gray-800">{{categoriasTotales}}</h4>
+                    <div class="text-gray-600">Categorías</div>
                   </div>
                 </div>
 
-                <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/4 xl:mt-0">
-                  <div
-                    class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
-                  >
-                    <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
-                      <svg
-                        class="h-8 w-8 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                    </div>
-
-                    <div class="mx-5">
-                      <h4 class="text-2xl font-semibold text-gray-700">
-                        {{ totalUsuarios }}
-                      </h4>
-                      <div class="text-gray-500">Usuarios</div>
-                    </div>
+                <!-- Usuarios -->
+                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                  <div class="p-3 rounded-full bg-[#DD971A]/20">
+                    <i class="fas fa-users text-[#DD971A] text-xl"></i>
+                  </div>
+                  <div class="mx-5">
+                    <h4 class="text-2xl font-semibold text-gray-800">{{ usuariosTotales }}</h4>
+                    <div class="text-gray-600">Usuarios</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Quick Actions Button Group -->
+            <!-- Quick Actions -->
             <div class="mt-8">
-              <h4 class="text-gray-600 font-medium mb-3">Acciones Rápidas</h4>
-              <div class="flex space-x-4">
-                <!-- <button class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-                Nueva Plantilla
-              </button> -->
+              <h4 class="text-gray-700 font-medium mb-4">Acciones Rápidas</h4>
+              <div class="flex flex-wrap gap-4">
                 <button
                   (click)="abrirModalImportarPlantilla()"
-                  class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
+                  class="flex items-center px-4 py-2 bg-[#00723F] text-white rounded-md hover:bg-[#005a32] transition"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                    />
-                  </svg>
+                  <i class="fas fa-file-import mr-2"></i>
                   Importar Plantillas
                 </button>
                 <button
-                  class="flex items-center px-4 py-2 bg-white text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 transition duration-200"
+                  class="flex items-center px-4 py-2 bg-white text-gray-700 rounded-md border border-gray-300 hover:bg-gray-100 transition"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-                    />
-                  </svg>
+                  <i class="fas fa-filter mr-2"></i>
                   Filtrar
                 </button>
               </div>
             </div>
 
-            <!-- Recent Templates & Usage -->
-            <div class="mt-8 flex flex-col lg:flex-row">
-              <!-- Latest Templates -->
-              <div class="bg-white rounded-lg shadow-md p-6 lg:w-2/3 lg:mr-4">
-                <div class="flex justify-between items-center mb-4">
-                  <h2 class="text-gray-700 text-lg font-semibold">
-                    Plantillas Recientes
-                  </h2>
-                  <a
-                    href="#"
-                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                    >Ver Todas</a
-                  >
-                </div>
-                <div class="overflow-y-auto">
-                  <div class="border-b py-3 flex items-center justify-between">
-                    <div class="flex items-center">
-                      <div
-                        class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 h-10 w-10 rounded flex items-center justify-center text-white font-bold mr-3"
-                      >
-                        CP
-                      </div>
-                      <div>
-                        <h3 class="text-gray-800 font-medium">
-                          Certificado de Participación
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                          Categoría: Participación • Creado: 25/04/2025
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex space-x-2">
-                      <button class="p-1 text-gray-500 hover:text-indigo-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </button>
-                      <button class="p-1 text-gray-500 hover:text-red-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="border-b py-3 flex items-center justify-between">
-                    <div class="flex items-center">
-                      <div
-                        class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 h-10 w-10 rounded flex items-center justify-center text-white font-bold mr-3"
-                      >
-                        RC
-                      </div>
-                      <div>
-                        <h3 class="text-gray-800 font-medium">
-                          Reconocimiento por Curso
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                          Categoría: Cursos • Creado: 23/04/2025
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex space-x-2">
-                      <button class="p-1 text-gray-500 hover:text-indigo-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </button>
-                      <button class="p-1 text-gray-500 hover:text-red-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="border-b py-3 flex items-center justify-between">
-                    <div class="flex items-center">
-                      <div
-                        class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 h-10 w-10 rounded flex items-center justify-center text-white font-bold mr-3"
-                      >
-                        AT
-                      </div>
-                      <div>
-                        <h3 class="text-gray-800 font-medium">
-                          Asistencia a Taller
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                          Categoría: Talleres • Creado: 20/04/2025
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex space-x-2">
-                      <button class="p-1 text-gray-500 hover:text-indigo-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </button>
-                      <button class="p-1 text-gray-500 hover:text-red-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="py-3 flex items-center justify-between">
-                    <div class="flex items-center">
-                      <div
-                        class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 h-10 w-10 rounded flex items-center justify-center text-white font-bold mr-3"
-                      >
-                        DE
-                      </div>
-                      <div>
-                        <h3 class="text-gray-800 font-medium">
-                          Diploma de Excelencia
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                          Categoría: Reconocimiento • Creado: 18/04/2025
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex space-x-2">
-                      <button class="p-1 text-gray-500 hover:text-indigo-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </button>
-                      <button class="p-1 text-gray-500 hover:text-red-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Usage Summary -->
-              <div
-                class="bg-white rounded-lg shadow-md p-6 lg:w-1/3 mt-6 lg:mt-0"
-              >
-                <div class="flex justify-between items-center mb-4">
-                  <h2 class="text-gray-700 text-lg font-semibold">
-                    Resumen de Uso
-                  </h2>
-                </div>
-                <div class="flex flex-col">
-                  <div class="flex justify-between text-gray-600 py-2 border-b">
-                    <span>Plantillas Creadas</span>
-                    <span class="font-semibold">45</span>
-                  </div>
-                  <div class="flex justify-between text-gray-600 py-2 border-b">
-                    <span>Constancias Emitidas</span>
-                    <span class="font-semibold">1,257</span>
-                  </div>
-                  <div class="flex justify-between text-gray-600 py-2 border-b">
-                    <span>Categorías</span>
-                    <span class="font-semibold">8</span>
-                  </div>
-                  <div class="flex justify-between text-gray-600 py-2">
-                    <span>Usuarios Activos</span>
-                    <span class="font-semibold">346</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Fin flex -->
+            
           </ng-container>
 
           <ng-template #routedContent>
             <router-outlet></router-outlet>
           </ng-template>
         </div>
-        <!-- Fin container -->
-        <div
-          *ngIf="mostrarModalImportarPlantilla"
-          class="fixed inset-0 flex items-center justify-center"
-        >
-          <div
-            class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md animate-fade-in"
-          >
+
+        <!-- Modal Importar Plantillas -->
+        <div *ngIf="mostrarModalImportarPlantilla" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md animate-fade-in">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">
               Importar Plantillas
             </h2>
-            <form
-              (ngSubmit)="importarPlantilla()"
-              enctype="multipart/form-data"
-            >
+            <form (ngSubmit)="importarPlantilla()" enctype="multipart/form-data">
               <div class="mb-4">
-                <label class="block">Nombre de plantilla</label>
-                <input class="bg-gray-300" type="text" required />
+                <label class="block text-gray-700 mb-2">Nombre de plantilla</label>
+                <input type="text" class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#00723F] focus:border-[#00723F]" required>
               </div>
               <div class="mb-4">
-                <label class="block">Categoria</label>
-                <input class="bg-gray-300" type="option" required />
+                <label class="block text-gray-700 mb-2">Categoría</label>
+                <select class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#00723F] focus:border-[#00723F]" required>
+                  <option value="">Seleccionar categoría</option>
+                  <!-- <option *ngFor="let cat of p" [value]="cat.id">{{ cat.nombre }}</option> -->
+                </select>
               </div>
               <div class="mb-4">
-                <label class="block text-gray-700"
-                  >Seleccionar archivo (.pdf )</label
-                >
+                <label class="block text-gray-700 mb-2">Archivo PDF</label>
                 <input
                   type="file"
                   (change)="onArchivoSeleccionado($event)"
-                  class="w-full mt-2 p-2 border rounded-md"
+                  class="w-full px-3 py-2 border rounded-md"
                   accept=".pdf"
                   required
-                />
+                >
               </div>
 
               <div class="flex justify-end space-x-3">
                 <button
                   type="button"
                   (click)="cerrarModalImportarPlantilla()"
-                  class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                  class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                  class="px-4 py-2 bg-[#00723F] text-white rounded-md hover:bg-[#005a32]"
                 >
                   Importar
                 </button>
@@ -685,11 +207,11 @@
         </div>
       </main>
     </div>
-    <!-- Fin Main Content -->
   </div>
-  <!-- Fin de la página -->
-  <!-- Modal Importar Plantillas -->
 </div>
+
 <ng-template #errorPage>
-  <app-pages-error></app-pages-error>
+  @if(isLoad){
+    <app-pages-error></app-pages-error>
+  }
 </ng-template>

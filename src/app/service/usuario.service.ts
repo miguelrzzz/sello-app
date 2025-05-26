@@ -6,24 +6,24 @@ import { usuarios } from '../models/usuarios.model';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:3000/public/usuarios'; 
+  private apiUrl = 'http://localhost/usuarios';
   private usuarioSesion: usuarios = {
-    idUsuario : 0,
-    nombre:'',
-    apPaterno :'',
-    apMaterno: '' ,
+    idUsuario: 0,
+    nombre: '',
+    apPaterno: '',
+    apMaterno: '',
     correo: '',
     password: '',
     idEstado: 0,
     idRol: 0
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Funciones para acceder a la APIs relacionadas a los usuarios
   //GET /usuarios/Total
-  getTotalUsuarios(): Observable<{success: boolean, data: number}> {
-    return this.http.get<{success: boolean, data: number}>(`${this.apiUrl}/Total`);
+  getTotalUsuarios(): Observable<{ success: boolean, data: number }> {
+    return this.http.get<{ success: boolean, data: number }>(`${this.apiUrl}/Total`);
   }
   // GET /usuarios
   getUsuarios(): Observable<any> {
@@ -52,8 +52,39 @@ export class UsuarioService {
 
   // PUT /usuarios/{id}
   actualizarUsuario(id: number, usuario: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, usuario);
+    return this.http.put(`${this.apiUrl}/datos/${id}`, usuario);
   }
+
+  // PUT /usuarios/{id}
+  // usuario.service.ts
+  actualizarEstadoUsuario(id: number, idEstado: number): Observable<any> {
+    const body = { idEstado: idEstado };
+
+    return this.http.put(
+      `${this.apiUrl}/estado/${id}`,
+      body,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        })
+      }
+    ).pipe(
+      catchError(error => {
+        console.error('Error completo:', error);
+        throw error; // Reenviar el error para manejo en el componente
+      })
+    );
+  }
+
+  //   actualizarEstadoUsuario(id: number, idEstado: number): Observable<any> {
+  //   const body = { idEstado: idEstado };
+  //   return this.http.put(
+  //     `${this.apiUrl}/estado/${id}`,
+  //     body,
+  //     this.httpOptions
+  //   );
+  // }
 
   // DELETE /usuarios/{id}
   eliminarUsuario(id: number): Observable<any> {

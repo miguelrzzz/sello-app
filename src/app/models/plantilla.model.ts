@@ -1,5 +1,5 @@
 export interface Plantilla{
-    idPlantilla: string;
+    idPlantilla: number;
     nombre: string;
     descripcion: string;
     tipo_archivo: string;
@@ -8,4 +8,3 @@ export interface Plantilla{
     ruta_archivo: string;
     categoria_idcategoria: number;
 }
-  

@@ -3,12 +3,12 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LocalService } from '../../service/local.service';
 import { OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   imports: [
     RouterLink,
-    RouterLinkActive,
-    NavbarComponent
+    CommonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

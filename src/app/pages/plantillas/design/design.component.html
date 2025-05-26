@@ -1,9 +1,10 @@
-
-    <button (click)="loadLocalPdf()">
-      Cargar y Modificar PDF Local
-    </button>
-    <button (click)="modifyUploadedPdf()" [disabled]="!selectedFile">
-      Modificar PDF Subido
-    </button>
-    <input type="file" (change)="onFileSelected($event)" accept=".pdf">
-  
+<label>Para una persona</label>
+<option [value]="opciones"><select name="" id=""></select></option>
+<div class="w-2xl h-xl bg-transparent">
+  <div *ngIf="!isLoading" class="w-full h-99 bg-transparent">
+    <app-pdf-thumbnail
+      [pdfUrl]="'/assets/' + (plantilla?.ruta_archivo || '')"
+      [thumbnailHeight]="450"
+    ></app-pdf-thumbnail>
+  </div>
+</div>

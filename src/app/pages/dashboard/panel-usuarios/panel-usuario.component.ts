@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 // Importar el modelo de usuario
 import { usuarios } from '../../../models/usuarios.model';
+import { RolesService } from '../../../service/roles.service';
+import { Roles } from '../../../models/roles.model';
+import { lastValueFrom } from 'rxjs';
 @Component({
   standalone: true,
   selector: 'app-usuario',
@@ -14,8 +17,9 @@ import { usuarios } from '../../../models/usuarios.model';
   providers: [UsuarioService]
 })
 export class PanelUsuarioComponent implements OnInit {
-  constructor(private usuario_service: UsuarioService) { }
+  constructor(private usuario_service: UsuarioService, private roles_service: RolesService) { }
   listUsuarios: usuarios[] = [];
+  listRoles: Roles[] = [];
   isAdd: boolean = false;
   isEdit: boolean = false;
   isDelete: boolean = false;
@@ -23,7 +27,7 @@ export class PanelUsuarioComponent implements OnInit {
   mostrarModalAgregar = false;
   mostrarModalEditar = false;
   mostrarModalEliminar = false;
-
+  mostrarModalStatus = false;
 
   // Variables para formulario
   idUsuario: number = 0;
@@ -36,10 +40,20 @@ export class PanelUsuarioComponent implements OnInit {
   idRol: number = 0;
 
   ngOnInit(): void {
+    this.cargarDatos();
+    console.log('lista ', this.listRoles);
+  }
+
+  cargarDatos() {
     this.usuario_service.getUsuarios().subscribe(data => {
       this.listUsuarios = data.data;
     });
+
+    this.roles_service.getRoles().subscribe(data => {
+      this.listRoles = data.data;
+    });
   }
+
   editarUsuario(usuario: usuarios) {
     this.isEdit = true;
   }
@@ -62,11 +76,17 @@ export class PanelUsuarioComponent implements OnInit {
     this.mostrarModalEliminar = true;
   }
 
+  abrirModalCambiarStatus(usuario: any) {
+    this.usuarioSeleccionado = usuario;
+    this.mostrarModalStatus = true;
+  }
+
   // Método para cerrar modales
   cerrarModal() {
     this.mostrarModalAgregar = false;
     this.mostrarModalEditar = false;
     this.mostrarModalEliminar = false;
+    this.mostrarModalStatus = false;
     this.usuarioSeleccionado = null;
   }
 
@@ -100,6 +120,13 @@ export class PanelUsuarioComponent implements OnInit {
     }
     this.cerrarModal();
   }
+  actualizarEstadoUsuario() {
+    const index = this.listUsuarios.findIndex(u => u.idUsuario === this.usuarioSeleccionado.idUsuario);
+    if (index !== -1) {
+      this.listUsuarios[index] = { ...this.usuarioSeleccionado };
+    }
+    this.cerrarModal();
+  }
 
   eliminarUsuario() {
     // Lógica para eliminar usuario
@@ -107,16 +134,39 @@ export class PanelUsuarioComponent implements OnInit {
     this.cerrarModal();
   }
 
+  // cambiarStatus(usuario: any) {
+  //   console.log(usuario.idUsuario);
+  //   this.usuario_service.actualizarEstadoUsuario(usuario.idUsuario);
+  //   this.cerrarModal();
+  // }
+
+  async cambiarStatus(idUsuario: number, nuevoEstado: number) {
+    try {
+      await lastValueFrom(
+        this.usuario_service.actualizarEstadoUsuario(idUsuario, nuevoEstado)
+      );
+
+      // Actualiza el estado del usuario en la lista
+      this.listUsuarios = this.listUsuarios.map(u =>
+        u.idUsuario === idUsuario ? { ...u, idEstado: nuevoEstado } : u
+      );
+
+      this.cerrarModal();
+    } catch (err) {
+      console.error('Error:', err);
+      // Manejo de errores
+    }
+  }
   // Resetear formulario
   resetForm() {
-    idUsuario : 0;
-    nombre:  '';
+    idUsuario: 0;
+    nombre: '';
     apPaterno: '';
     apMaterno: '';
-    correo:  '';
+    correo: '';
     password: '';
-    idEstado:  0;
-    idRol:  0;
+    idEstado: 0;
+    idRol: 0;
 
   }
 }

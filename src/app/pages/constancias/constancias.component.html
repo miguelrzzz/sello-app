@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UABC - Sistema de Constancias</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo y nombre -->
+          <div class="flex items-center">
+            <img src="assets/logo-uabc.png" alt="Logo UABC" class="h-12" />
+            <span class="ml-3 text-xl font-semibold text-[#00723F]"
+              >UABC - SC</span
+            >
+          </div>
+
+          <!-- Menú desktop -->
+          <div class="flex items-center space-x-8">
+            <a
+              routerLink="/"
+              class="text-gray-600 hover:text-[#00723F] transition-colors"
+              >Inicio</a
+            >
+            <a
+              routerLink="/eventos"
+              class="text-gray-600 hover:text-[#00723F] transition-colors"
+              >Eventos</a
+            >
+
+            <!-- Dropdown Constancias -->
+            <div class="relative group">
+              <button
+                class="text-gray-600 hover:text-[#00723F] transition-colors flex items-center"
+              >
+                <a routerLink="../constancias">Constancias</a>
+                <svg
+                  class="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              <div
+                class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block"
+              >
+                <a
+                  routerLink="/constancias/generar"
+                  class="block px-4 py-2 text-gray-600 hover:bg-[#00723F] hover:text-white"
+                  >Generar Constancia</a
+                >
+                <a
+                  routerLink="/constancias/mis-constancias"
+                  class="block px-4 py-2 text-gray-600 hover:bg-[#00723F] hover:text-white"
+                  >Mis Constancias</a
+                >
+                <a
+                  routerLink="/constancias/historial"
+                  class="block px-4 py-2 text-gray-600 hover:bg-[#00723F] hover:text-white"
+                  >Historial</a
+                >
+                <a
+                  routerLink="/constancias/solicitudes"
+                  class="block px-4 py-2 text-gray-600 hover:bg-[#00723F] hover:text-white"
+                  >Solicitudes</a
+                >
+              </div>
+            </div>
+
+            <!-- Botón de sesión -->
+            <div *ngIf="isLoggedIn; else ingresar" class="relative group">
+              <button
+                class="border-b-2 border-[#00723F] text-black px-4 py-2 hover:text-[#005a32] transition-colors flex items-center gap-2"
+              >
+                <i class="fas fa-user-circle text-2xl"></i>
+                <span>{{ usuario?.nombre }}</span>
+                <i class="fas fa-chevron-down text-sm"></i>
+              </button>
+
+              <div
+                class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block"
+              >
+                <ul class="py-2">
+                  <li
+                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                  >
+                    <a routerLink="/cuenta">Ir a cuenta</a>
+                  </li>
+                  <li
+                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500"
+                    (click)="logout()"
+                  >
+                    Cerrar sesión
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <ng-template #ingresar>
+              <a
+                routerLink="/login"
+                class="border-b-2 border-[#00723F] text-black px-4 py-2 hover:text-[#005a32] transition-colors"
+              >
+                Ingresar
+              </a>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div></div>
+    <main class="min-h-screen bg-white">
+      <div class="p-10">
+        <p class="text-gray-700 mb-6">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id tenetur
+          velit, obcaecati assumenda distinctio qui, quisquam, voluptate ipsam
+          nesciunt cum illo accusamus eaque ipsum libero nemo consectetur itaque
+          inventore cupiditate. Este sistema te permite consultar, descargar y
+          gestionar tus constancias.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

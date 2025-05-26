@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PlantillaService {
-  private apiUrl = 'http://localhost:3000/public/plantillas'; 
+  private apiUrl = 'http://localhost/plantillas'; 
 
   constructor(private http: HttpClient) {}
 
-  //GET /usuarios/Total
+  //GET /plantillas/total
   getTotalPlantillas(): Observable<{success: boolean, data: number}> {
     return this.http.get<{success: boolean, data: number}>(`${this.apiUrl}/Total`);
   }
-  // GET /usuarios
+  // GET /plantillas
   getPlantillas(): Observable<any> {
     return this.http.get(this.apiUrl);
   }

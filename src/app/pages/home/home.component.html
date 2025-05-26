@@ -1,50 +1,117 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<main class="in-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
-    <app-navbar></app-navbar>
-    <!-- Hero section -->
-    <div class="container mx-auto px-6 min-h-screen flex items-center">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-            <div class="md:w-1/2 space-y-8 animate-fade-in-left">
-                <h1 class="text-6xl font-bold text-white leading-tonght">
-                    Sello<span class="text-purple-500"> constancias al instante</span>
-                </h1>
-                <p class="text-xl text-gray-200 leading-relaxed max-w-xl">
-                    Generamos constancias validas para ti
-                </p>
-                <div class="flex gap-4 ">
-                    <a [routerLink]="this.isLog ? '/plantillas' : '/login'" routerLinkActive="border-b-2" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hove:bg-gray-100 transition-colors inline-flex items-center gap-4">
-                    Comenzar ahora
-                    <i class="fas fa-arrow-right wrap-normal"></i>
-                    </a>
-                    <a href="" class="text-white border border-white/30 px-8 py-4 rounded-lg hover:bg-white/10 transition-colors">
-                        Como funciona
-                    </a>
-                </div>
-            </div>
+
+<main class="min-h-screen bg-white">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-sm">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <img src="assets/logo-uabc.png" alt="Logo UABC" class="h-12">
+          <span class="ml-3 text-xl font-semibold text-[#00723F]">UABC</span>
         </div>
-        <div class="md:w-1/2 animate-float">
-            <div class="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white">
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="text-white h-12 w-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                            <i class="far fa-file-pdf"></i>
-                        </div>
-                        <div class="text-white ">
-                            <h3 class="font-semibold">Constancias personalizadas</h3>
-                            <p class="text-gray-300">Plantillas diseñadas por expertos</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="text-white h-12 w-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                            <i class="far fa-file-pdf"></i>
-                        </div>
-                        <div class="text-white ">
-                            <h3 class="font-semibold">Rapido y sencillo</h3>
-                            <p class="text-gray-300">En menos de 5mn</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#" class="text-gray-600 hover:text-[#00723F]">Inicio</a>
+          <a href="#" class="text-gray-600 hover:text-[#00723F]">Servicios</a>
+          <a href="#" class="text-gray-600 hover:text-[#00723F]">Contacto</a>
+          <a [routerLink]="isLog ? '/home' : '/login'" class="border-b-2 border-#00723F text-black px-4 py-2 hover:text-[#005a32] transition-colors">
+            <span *ngIf="isLog; else ingresar">Ir</span>
+            <ng-template #ingresar>Ingresar</ng-template>
+          </a>
         </div>
       </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="py-20">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 space-y-8 animate-fade-in-left">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
+          Sistema de <span class="text-[#00723F]">Constancias Digitales</span> UABC
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed max-w-xl">
+          Plataforma oficial para la generación y validación de documentos académicos
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a [routerLink]="this.isLog ? '/plantillas' : '/login'" 
+             class="bg-[#DD971A] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#c27e0e] transition-colors inline-flex items-center justify-center gap-3">
+            <i class="fas fa-rocket"></i>
+            Comenzar ahora
+          </a>
+          <a href="#como-funciona" 
+             class="border-2 border-[#00723F] text-[#00723F] px-8 py-3 rounded-lg font-medium hover:bg-[#00723F]/10 transition-colors text-center">
+            <i class="fas fa-info-circle mr-2"></i>
+            Cómo funciona
+          </a>
+        </div>
+
+        <!-- Sellos de seguridad -->
+        <div class="flex flex-wrap gap-4 pt-6">
+          <div class="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-full">
+            <div class="text-[#DD971A]">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <span class="text-sm text-gray-600">Plataforma segura</span>
+          </div>
+          <div class="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-full">
+            <div class="text-[#DD971A]">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <span class="text-sm text-gray-600">Oficial UABC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 mt-12 md:mt-0 animate-fade-in-right">
+        <div class="relative">
+          <!-- Tarjeta flotante -->
+          <div class="absolute -top-8 -left-8 bg-[#00723F] text-white p-6 rounded-lg shadow-xl w-64 z-10">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-[#DD971A] p-2 rounded-full">
+                <i class="fas fa-file-certificate"></i>
+              </div>
+              <h3 class="font-bold">Documentos válidos</h3>
+            </div>
+            <p class="text-sm">Con sello digital institucional y código QR de verificación</p>
+          </div>
+
+          <!-- Imagen principal -->
+          <div class="relative z-0">
+            <img src="assets/documentos-uabc.jpg" alt="Constancias UABC" class="rounded-xl shadow-lg border-8 border-white">
+          </div>
+
+          <!-- Tarjeta flotante secundaria -->
+          <div class="absolute -bottom-8 -right-8 bg-white border border-gray-200 p-6 rounded-lg shadow-xl w-64 z-10">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-[#DD971A] text-white p-2 rounded-full">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <h3 class="font-bold text-gray-800">Proceso rápido</h3>
+            </div>
+            <p class="text-sm text-gray-600">Generación en menos de 3 minutos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="bg-[#00723F] text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <!-- <img src="../../../assets/logo-uabc.png" alt="Logo UABC" class="h-16 mb-4"> -->
+          <p class="text-white/80">"Por la realización plena del hombre"</p>
+        </div>
+        
+      </div>
+      
+      <div class="border-t border-white/20 mt-12 pt-6 text-center text-white/60 text-sm">
+        <p>© 2023 Universidad Autónoma de Baja California. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
 </main>

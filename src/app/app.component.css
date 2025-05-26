@@ -1,0 +1,9 @@
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}

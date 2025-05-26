@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RolesService {
-  private apiUrl = 'http://localhost:3000/public/roles'; 
+  private apiUrl = 'http://localhost/roles'; 
 
   constructor(private http: HttpClient) {}
 

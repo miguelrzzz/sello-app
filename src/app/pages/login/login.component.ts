@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         this.isAdmin = true;
         this.router.navigate(['/dashboard']);
       } else {
-        this.router.navigate(['/plantillas']);
+        this.router.navigate(['/home']);
       }
 
     } else {
